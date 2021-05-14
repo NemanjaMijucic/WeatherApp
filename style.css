@@ -15,7 +15,7 @@ body{
 }
 
 .location{
-    height: 30vh;
+    height: 20vh;
     width: 50%;
     display: flex;
     justify-content: space-around;
@@ -23,11 +23,15 @@ body{
 }
 .temperature{
     flex-direction: column;
+    background-color: linear-gradient(rgb(211, 232, 235), rgb(203, 207, 228));;
+    border-radius: 15px;
+    padding: 20px;
 }
 .degree-section{
     display: flex;
     align-items: center;
     cursor: pointer;
+    font-size: 28px;
 }
 .degree-section span{
     margin: 10px;
@@ -35,4 +39,27 @@ body{
 }
 .degree-section h2{
     font-size: 40px;
+}
+.temperature-degree{
+    padding-top: 30px;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+.temperature-description{
+    padding-top: 30px;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+.temperature-feelsLike{
+    padding-top: 30px;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+.wind-speed{
+    padding-top: 30px;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+.icon-holder{
+    display: flex;
 }
