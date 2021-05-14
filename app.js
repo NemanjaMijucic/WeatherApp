@@ -38,9 +38,6 @@ window.addEventListener('load', () => {
 
 
 
-
-
     }
-
 
 });
