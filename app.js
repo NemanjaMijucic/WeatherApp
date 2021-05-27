@@ -11,6 +11,14 @@ window.addEventListener('load', () => {
     let timeHolder = document.querySelector('.time-holder');
 
     let time = new Date();
+    function addZero(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+      }
+      let h = addZero(time.getHours());
+      let m = addZero(time.getMinutes());
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -35,7 +43,7 @@ window.addEventListener('load', () => {
                     feelsLike.innerText = `feels like: ${Math.round(data.main.feels_like - 273)} C`;
                     windSpeed.innerText = `wind speed: ${data.wind.speed} m/s`;
                     console.log(data);
-                    timeHolder.innerText = `${time.toDateString()} ${time.getHours()}:${time.getMinutes()}`
+                    timeHolder.innerText = `${time.toDateString()} ${h}:${m}`
                 })
 
         });
