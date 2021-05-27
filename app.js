@@ -8,6 +8,9 @@ window.addEventListener('load', () => {
     let icon = document.getElementById('icon');
     let feelsLike = document.querySelector('.temperature-feelsLike');
     let windSpeed = document.querySelector('.wind-speed');
+    let timeHolder = document.querySelector('.time-holder');
+
+    let time = new Date();
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -32,6 +35,7 @@ window.addEventListener('load', () => {
                     feelsLike.innerText = `feels like: ${Math.round(data.main.feels_like - 273)} C`;
                     windSpeed.innerText = `wind speed: ${data.wind.speed} m/s`;
                     console.log(data);
+                    timeHolder.innerText = `${time.toDateString()} ${time.getHours()}:${time.getMinutes()}`
                 })
 
         });
