@@ -62,3 +62,15 @@ body{
 .icon-holder{
     display: flex;
 }
+
+@media only screen and (max-width: 700px) {
+    .location{
+        display: block;
+    }
+    .location-timezone{
+        margin-bottom: 10px;
+    }
+    .location-country{
+        margin-bottom: 10px;
+    }
+}
