@@ -1,76 +1,119 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-body{
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    background: linear-gradient(rgb(47,150,163), rgb(48,62,143));
-    font-family: sans-serif;
-    color: wheat;
+body {
+  height: 100vh;
+  width: 90%;
+  margin: 20px auto;
+  background: linear-gradient(rgb(169, 170, 235), rgb(182, 194, 231));
+  font-family: sans-serif;
+  color: rgb(245, 243, 240);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.location{
-    height: 20vh;
-    width: 50%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+#wrapper {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 90%;
 }
-.temperature{
-    flex-direction: column;
-    background-color: linear-gradient(rgb(211, 232, 235), rgb(203, 207, 228));;
-    border-radius: 15px;
-    padding: 20px;
+.location {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.degree-section{
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    font-size: 28px;
-}
-.degree-section span{
-    margin: 10px;
-    font-size: 30px;
-}
-.degree-section h2{
-    font-size: 40px;
-}
-.temperature-degree{
-    padding-top: 30px;
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-.temperature-description{
-    padding-top: 30px;
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-.temperature-feelsLike{
-    padding-top: 30px;
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-.wind-speed{
-    padding-top: 30px;
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-.icon-holder{
-    display: flex;
+h2 {
+  margin: 15px;
 }
 
+#weather-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#temperature {
+  font-size: 2rem;
+}
+
+#weather-info p {
+  margin: 10px;
+}
+.daily {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+}
+.daily-weather {
+  margin-right: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+sup {
+  font-size: 12px;
+}
+/*
+.temperature {
+  flex-direction: column;
+  background-color: linear-gradient(rgb(211, 232, 235), rgb(203, 207, 228));
+  border-radius: 15px;
+  padding: 20px;
+}
+.degree-section {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 28px;
+}
+.degree-section span {
+  margin: 10px;
+  font-size: 30px;
+}
+.degree-section h2 {
+  font-size: 40px;
+}
+.temperature-degree {
+  padding-top: 30px;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+.temperature-description {
+  padding-top: 30px;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+.temperature-feelsLike {
+  padding-top: 30px;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+.wind-speed {
+  padding-top: 30px;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+.icon-holder {
+  display: flex;
+} */
+
 @media only screen and (max-width: 700px) {
-    .location{
-        display: block;
-    }
-    .location-timezone{
-        margin-bottom: 10px;
-    }
-    .location-country{
-        margin-bottom: 10px;
-    }
+  .location {
+    display: block;
+  }
+  .location-timezone {
+    margin-bottom: 10px;
+  }
+  .location-country {
+    margin-bottom: 10px;
+  }
 }

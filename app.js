@@ -1,55 +1,107 @@
-window.addEventListener('load', () => {
-    let long;
-    let lat;
-    let temperatureDescription = document.querySelector('.temperature-description');
-    let temperatureDegree = document.querySelector('.temperature-degree');
-    let locationCountry = document.querySelector('.location-country');
-    let locationTimezone = document.querySelector('.location-timezone');
-    let icon = document.getElementById('icon');
-    let feelsLike = document.querySelector('.temperature-feelsLike');
-    let windSpeed = document.querySelector('.wind-speed');
-    let timeHolder = document.querySelector('.time-holder');
+"use strict";
 
-    let time = new Date();
-    function addZero(i) {
-        if (i < 10) {
-          i = "0" + i;
+import { addZero, convertToCelsius } from "./helperFunctions.js";
+
+const days = [
+  "Monday",
+  "Tuesday",
+  "Wendsday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
+
+const wrapper = document.querySelector("#wrapper");
+const dailyWrapper = document.querySelector(".daily");
+
+let time = new Date();
+let dayOfWeek = time.getDay();
+let hour = addZero(time.getHours());
+let min = addZero(time.getMinutes());
+
+wrapper.innerHTML = "<p>Loading...</p>";
+
+window.addEventListener("load", () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      const long = position.coords.longitude;
+      const lat = position.coords.latitude;
+
+      const api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=2c4ae810fb0582e5bfd2d6d93d8e708d`;
+
+      async function weatherInfo(lat, long) {
+        try {
+          //gathering weather data for one day
+          const res = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=2c4ae810fb0582e5bfd2d6d93d8e708d`
+          );
+          if (!res.ok) throw new Error("Problem getting location");
+          const data = await res.json();
+          console.log(data);
+          const { temp, feels_like, temp_max, temp_min } = data.main;
+          const html = `
+          <div class="location">
+              <h2 class="location-timezone">Location: ${data.name}</h2>
+              <h2 class="location-country">Country: ${data.sys.country}</h2>
+              <h2 class="time-holder">Time: ${hour}:${min}</h2>
+          </div>
+          <div id="weather-info">
+               <div id="img">
+               <img src = http://openweathermap.org/img/wn/${
+                 data.weather[0].icon
+               }@4x.png alt="image"/>
+                
+                </div>
+                <div id="temperateure">
+                <p id="temperature"> ${convertToCelsius(temp)}<sup>℃</sup></p>
+                  <p>Feels like: ${convertToCelsius(feels_like)}<sup>℃</sup></p>
+                  <p>Temperature max: ${convertToCelsius(
+                    temp_max
+                  )}<sup>℃</sup></p>
+                  <p>Temperature min: ${convertToCelsius(
+                    temp_min
+                  )}<sup>℃</sup></p>
+                  <p>Description: ${data.weather[0].description}</p>
+  
+              </div>
+          </div>
+         
+          `;
+          wrapper.innerHTML = html;
+
+          //gathering daily weather data
+          const dailyWatherInfo = await fetch(
+            `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude={part}&appid=2c4ae810fb0582e5bfd2d6d93d8e708d`
+          );
+          if (!dailyWatherInfo.ok) throw new Error("UPS! Something went wrong");
+          const dailyData = await dailyWatherInfo.json();
+
+          // console.log(dailyData);
+
+          const { daily } = dailyData;
+          console.log(daily);
+          const forecastFordayse = daily.slice(1, 6);
+          forecastFordayse.forEach((day) => {
+            if (dayOfWeek >= 7) {
+              dayOfWeek = 0;
+            }
+            let htmlDaily = `
+              <div class="daily-weather">
+              <h3>${days[dayOfWeek]}</h3>
+              <p>Temp: ${convertToCelsius(day.temp.day)}<sup>℃</sup></p>
+              <p>Temp max: ${convertToCelsius(day.temp.max)}<sup>℃</sup></p>
+              <p>Temp min: ${convertToCelsius(day.temp.min)}<sup>℃</sup></p>
+              </div>
+            `;
+            dayOfWeek++;
+            dailyWrapper.innerHTML += htmlDaily;
+          });
+        } catch (err) {
+          wrapper.innerHTML = `<p>${err.message}</p>`;
         }
-        return i;
       }
-      let h = addZero(time.getHours());
-      let m = addZero(time.getMinutes());
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            long = position.coords.longitude;
-            lat = position.coords.latitude;
-
-            const api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=2c4ae810fb0582e5bfd2d6d93d8e708d`;
-
-            fetch(api)
-                .then(response => {
-                    return response.json();
-                })
-                .then(data => {
-                    console.log(data.weather[0].description)
-                    const description = data.weather[0].description;
-                    temperatureDescription.innerText = description;
-                    const temperature = Math.floor(data.main.temp - 273);
-                    temperatureDegree.innerText = `temperature: ${temperature} C`;
-                    locationTimezone.innerText =  data.name;
-                    locationCountry.innerText = data.sys.country;
-                    icon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-                    feelsLike.innerText = `feels like: ${Math.round(data.main.feels_like - 273)} C`;
-                    windSpeed.innerText = `wind speed: ${data.wind.speed} m/s`;
-                    console.log(data);
-                    timeHolder.innerText = `${time.toDateString()} ${h}:${m}`
-                })
-
-        });
-
-
-
-    }
-
+      weatherInfo(lat, long);
+    });
+  }
 });
