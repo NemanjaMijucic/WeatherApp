@@ -14,7 +14,7 @@ const days = [
 
 const wrapper = document.querySelector("#wrapper");
 const dailyWrapper = document.querySelector(".daily");
-
+const title = document.querySelector(".title");
 let time = new Date();
 let dayOfWeek = time.getDay();
 let hour = addZero(time.getHours());
@@ -95,6 +95,7 @@ window.addEventListener("load", () => {
               </div>
             `;
             dayOfWeek++;
+            title.style.opacity = 1;
             dailyWrapper.innerHTML += htmlDaily;
           });
         } catch (err) {
