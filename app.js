@@ -15,16 +15,11 @@ const days = [
 const wrapper = document.querySelector("#wrapper");
 const dailyWrapper = document.querySelector(".daily");
 const titles = document.querySelectorAll(".title");
-let dayOfWeek;
-let hour;
-let min;
-setInterval(function () {
-  let time = new Date();
-  dayOfWeek = time.getDay();
-  hour = addZero(time.getHours());
-  min = addZero(time.getMinutes());
-}, 1000);
 
+let time = new Date();
+let dayOfWeek = time.getDay();
+let hour = addZero(time.getHours());
+let min = addZero(time.getMinutes());
 wrapper.innerHTML = "<p>Loading...</p>";
 
 window.addEventListener("load", () => {
@@ -49,7 +44,7 @@ window.addEventListener("load", () => {
           <div class="location">
               <h2 class="location-timezone">Location: ${data.name}</h2>
               <h2 class="location-country">Country: ${data.sys.country}</h2>
-              <h2 class="time-holder">Time: ${hour}:${min}</h2>
+              <h2 class="time-holder">Time: ${hour}:${min} </h2>
           </div>
           <div id="weather-info">
                <div id="img">
