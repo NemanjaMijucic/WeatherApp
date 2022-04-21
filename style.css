@@ -7,13 +7,37 @@ body {
   height: 100vh;
   width: 90%;
   margin: 20px auto;
-  background: linear-gradient(rgb(169, 170, 235), rgb(182, 194, 231));
+  /* background-size: contain;
+  background-repeat: no-repeat;
+  background: linear-gradient(
+    rgb(151, 153, 231),
+    rgb(170, 184, 224),
+    rgb(180, 190, 226)
+  ); */
   font-family: sans-serif;
   color: rgb(245, 243, 240);
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  background: linear-gradient(-135deg, rgb(21, 51, 107) 20%, transparent),
+    repeating-linear-gradient(
+      45deg,
+      rgb(27, 54, 104) 0%,
+      rgba(31, 48, 94, 0.6) 5%,
+      transparent 20%,
+      transparent 10%
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(26, 57, 114, 0.4) 0%,
+      rgba(21, 33, 66, 0.5) 5%,
+      transparent 200%,
+      transparent 10%
+    );
+  background-color: rgba(34, 76, 152, 0.25);
 }
+
 #wrapper {
   margin: 0 auto;
   display: flex;
@@ -32,6 +56,13 @@ h2 {
 }
 .title {
   opacity: 0;
+  width: 100%;
+  padding: 5px;
+  text-align: center;
+  color: black;
+  font-size: 1.5rem;
+  border-radius: 10px;
+  background-color: #ddd;
 }
 
 #weather-info {
@@ -41,23 +72,21 @@ h2 {
 }
 
 #temperature {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 #weather-info p {
   margin: 10px;
 }
 .daily {
-  margin: 0 auto;
+  margin: 15px auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 90%;
 }
 .daily-weather {
-  margin-right: 10px;
-  padding-top: 10px;
-  padding-left: 10px;
+  margin: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -67,6 +96,9 @@ sup {
 }
 
 @media only screen and (max-width: 700px) {
+  body {
+    height: 200vh;
+  }
   .location {
     display: block;
   }
@@ -74,8 +106,22 @@ sup {
     display: flex;
     flex-direction: column;
   }
+  #temp {
+    font-size: 3rem;
+    text-align: center;
+  }
+  #weather-info p {
+    font-size: 1.5rem;
+  }
+
   .daily {
     display: flex;
     flex-direction: column;
+  }
+  .daily-weather p {
+    font-size: 1.5rem;
+  }
+  .daily-weather h3 {
+    font-size: 2rem;
   }
 }

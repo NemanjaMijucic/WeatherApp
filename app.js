@@ -14,11 +14,16 @@ const days = [
 
 const wrapper = document.querySelector("#wrapper");
 const dailyWrapper = document.querySelector(".daily");
-const title = document.querySelector(".title");
-let time = new Date();
-let dayOfWeek = time.getDay();
-let hour = addZero(time.getHours());
-let min = addZero(time.getMinutes());
+const titles = document.querySelectorAll(".title");
+let dayOfWeek;
+let hour;
+let min;
+setInterval(function () {
+  let time = new Date();
+  dayOfWeek = time.getDay();
+  hour = addZero(time.getHours());
+  min = addZero(time.getMinutes());
+}, 1000);
 
 wrapper.innerHTML = "<p>Loading...</p>";
 
@@ -53,8 +58,8 @@ window.addEventListener("load", () => {
                }@4x.png alt="image"/>
                 
                 </div>
-                <div id="temperateure">
-                <p id="temperature"> ${convertToCelsius(temp)}<sup>℃</sup></p>
+                <div id="temperature">
+                <h2 id="temp"> ${convertToCelsius(temp)}<sup>℃</sup></h2>
                   <p>Feels like: ${convertToCelsius(feels_like)}<sup>℃</sup></p>
                   <p>Temperature max: ${convertToCelsius(
                     temp_max
@@ -95,7 +100,7 @@ window.addEventListener("load", () => {
               </div>
             `;
             dayOfWeek++;
-            title.style.opacity = 1;
+            titles.forEach((title) => (title.style.opacity = 1));
             dailyWrapper.innerHTML += htmlDaily;
           });
         } catch (err) {
