@@ -22,7 +22,7 @@ let hour = addZero(time.getHours());
 let min = addZero(time.getMinutes());
 wrapper.innerHTML = "<p>Loading...</p>";
 
-window.addEventListener("load", () => {
+(function weatherForecast() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
       const long = position.coords.longitude;
@@ -103,4 +103,4 @@ window.addEventListener("load", () => {
       weatherInfo(lat, long);
     });
   }
-});
+})();
