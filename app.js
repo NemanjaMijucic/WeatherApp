@@ -28,6 +28,7 @@ window.addEventListener("load", () => {
       const long = position.coords.longitude;
       const lat = position.coords.latitude;
 
+      if (!long || !lat) throw new Error("Allow app to acsess your location");
       const api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=2c4ae810fb0582e5bfd2d6d93d8e708d`;
 
       async function weatherInfo(lat, long) {
