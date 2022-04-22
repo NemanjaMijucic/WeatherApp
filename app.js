@@ -36,7 +36,7 @@ window.addEventListener("load", () => {
           const res = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=2c4ae810fb0582e5bfd2d6d93d8e708d`
           );
-          if (!res.ok) throw new Error("Problem getting location");
+          if (!res.ok) throw new Error("UPS! Something went wrong.");
           const data = await res.json();
           console.log(data);
           const { temp, feels_like, temp_max, temp_min } = data.main;
@@ -77,10 +77,7 @@ window.addEventListener("load", () => {
           if (!dailyWatherInfo.ok) throw new Error("UPS! Something went wrong");
           const dailyData = await dailyWatherInfo.json();
 
-          // console.log(dailyData);
-
           const { daily } = dailyData;
-          console.log(daily);
           const forecastFordayse = daily.slice(1, 6);
           forecastFordayse.forEach((day) => {
             if (dayOfWeek >= 7) {
@@ -89,9 +86,9 @@ window.addEventListener("load", () => {
             let htmlDaily = `
               <div class="daily-weather">
               <h3>${days[dayOfWeek]}</h3>
-              <p>Temp: ${convertToCelsius(day.temp.day)}<sup>℃</sup></p>
-              <p>Temp max: ${convertToCelsius(day.temp.max)}<sup>℃</sup></p>
-              <p>Temp min: ${convertToCelsius(day.temp.min)}<sup>℃</sup></p>
+              <p> ${day.weather[0].description}</p>
+              <p> max: ${convertToCelsius(day.temp.max)}<sup>℃</sup></p>
+              <p> min: ${convertToCelsius(day.temp.min)}<sup>℃</sup></p>
               </div>
             `;
             dayOfWeek++;
@@ -99,7 +96,7 @@ window.addEventListener("load", () => {
             dailyWrapper.innerHTML += htmlDaily;
           });
         } catch (err) {
-          wrapper.innerHTML = `<p>${err.message}</p>`;
+          wrapper.innerHTML = `<p id="error">${err.message}</p>`;
         }
       }
       weatherInfo(lat, long);

@@ -80,12 +80,24 @@ h2 {
 }
 .daily-weather {
   margin: 10px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   justify-content: space-evenly;
+}
+.daily-weather p {
+  font-size: 1rem;
+}
+.daily-weather h3 {
+  font-size: 1.5rem;
 }
 sup {
   font-size: 12px;
+}
+#error {
+  font-size: 3rem;
+  color: red;
 }
 
 @media only screen and (max-width: 700px) {
@@ -110,6 +122,15 @@ sup {
   .daily {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .daily-weather {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .daily-weather p {
     font-size: 1.5rem;
