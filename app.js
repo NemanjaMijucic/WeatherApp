@@ -5,7 +5,7 @@ import { addZero, convertToCelsius } from "./helperFunctions.js";
 const days = [
   "Monday",
   "Tuesday",
-  "Wendsday",
+  "Wednesday",
   "Thursday",
   "Friday",
   "Saturday",
