@@ -81,6 +81,8 @@ wrapper.innerHTML = "<p>Loading...</p>";
           const { daily } = dailyData;
           const forecastFordayse = daily.slice(1, 6);
           forecastFordayse.forEach((day) => {
+            console.log(day.weather[0].icon);
+
             if (dayOfWeek >= 7) {
               dayOfWeek = 0;
             }
@@ -88,6 +90,9 @@ wrapper.innerHTML = "<p>Loading...</p>";
               <div class="daily-weather">
               <h3>${days[dayOfWeek]}</h3>
               <p> ${day.weather[0].description}</p>
+              <img src = http://openweathermap.org/img/wn/${
+                day.weather[0].icon
+              }@2x.png alt="image"/>
               <p> max: ${convertToCelsius(day.temp.max)}<sup>℃</sup></p>
               <p> min: ${convertToCelsius(day.temp.min)}<sup>℃</sup></p>
               </div>
